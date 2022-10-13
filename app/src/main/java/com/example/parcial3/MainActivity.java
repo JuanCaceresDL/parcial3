@@ -4,46 +4,44 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.graphics.Movie;
 import android.os.Bundle;
+import android.widget.Toast;
 
-import com.example.parcial3.Adapter.MovieAdapter;
-import com.example.parcial3.api.MoviesApi;
+import com.example.parcial3.Adapter.MoviesAdapter;
+import com.example.parcial3.View.IMovieView;
+import com.example.parcial3.bean.Movie;
 import com.example.parcial3.presenter.MoviePresenter;
+import com.example.parcial3.presenter.IMoviePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
+public class MainActivity extends AppCompatActivity implements IMovieView {
 
-public class MainActivity extends AppCompatActivity {
-
-    private MovieAdapter adapter;
-    private MoviesApi api;
-    private MoviePresenter presenter;
+    private IMoviePresenter moviePresenter;
+    private MoviesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        RecyclerView rvMovies = (RecyclerView) findViewById(R.id.movie_list);
+        this.adapter = new MoviesAdapter(new ArrayList<>());
+        rvMovies.setAdapter(adapter);
+        rvMovies.setLayoutManager(new LinearLayoutManager(this));
 
-        RecyclerView rvBooks = (RecyclerView) findViewById(R.id.movie_list);
-        this.adapter = new MovieAdapter(new ArrayList<>());
-        rvBooks.setAdapter(adapter);
-        rvBooks.setLayoutManager(new LinearLayoutManager(this));
+        this.moviePresenter = new MoviePresenter(this);
+        this.moviePresenter.getMovies();
     }
-    Call<List<Movie>> bookCall = api.getMovies();
-        bookCall.enqueue(new Callback<List<Movie>>() {
-        @Override
-        public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
-            presenter.onBooksSuccess(response.body());
-        }
 
-        @Override
-        public void onFailure(Call<List<Movie>> call, Throwable t) {
-            presenter.onBooksError("Error el obtener los libros");
-        }
-    });
+    @Override
+    public void onMovieSuccess(List<Movie> movie) {
+        adapter.reloadData(movie);
+    }
 
+    @Override
+    public void onMovieError(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG)
+                .show();
+    }
 }
