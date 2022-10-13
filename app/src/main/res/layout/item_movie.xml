@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="20dp">
+
+    <ImageView
+        android:id="@+id/movie_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/movie_image" />
+
+    <TextView
+        android:id="@+id/movie_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/movie_image"
+        android:layout_marginStart="20dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="Nombre de la peli"/>
+
+    <TextView
+        android:id="@+id/movie_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/movie_name"
+        app:layout_constraintStart_toEndOf="@id/movie_image"
+        android:text="año"
+        android:textSize="16sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"/>
+    <TextView
+        android:id="@+id/movie_runtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/movie_year"
+        app:layout_constraintStart_toEndOf="@id/movie_image"
+        android:text="runtime"
+        android:textSize="16sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"/>
+    <TextView
+        android:id="@+id/movie_director"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/movie_runtime"
+        app:layout_constraintStart_toEndOf="@id/movie_image"
+        android:text="director"
+        android:textSize="16sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"/>
+    <TextView
+        android:id="@+id/movie_actors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/movie_name"
+        android:text="actors"
+        android:textSize="16sp"
+        android:layout_marginStart="20dp"/>
+    <TextView
+        android:id="@+id/movie_plot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/movie_actors"
+        app:layout_constraintStart_toEndOf="@id/movie_name"
+        android:text="plot"
+        android:textSize="16sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
